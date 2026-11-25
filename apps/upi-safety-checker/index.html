@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102a43">
+  <meta name="description" content="Check suspicious UPI messages and links locally on your device.">
+  <title>UPI Suraksha Check</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="top">
+      <p class="eyebrow">DIGITAL SAFETY • INDIA</p>
+      <h1>UPI Suraksha Check</h1>
+      <p class="intro">Koi suspicious SMS, WhatsApp message ya payment link mila? Yahan check karein.</p>
+      <div class="privacy"><span aria-hidden="true">🔒</span> Aapka text isi device par check hota hai. Kahin upload nahi hota.</div>
+    </header>
+
+    <section class="panel" aria-labelledby="check-title">
+      <h2 id="check-title">Message ya link paste karein</h2>
+      <label class="sr-only" for="message">Suspicious message or link</label>
+      <textarea id="message" rows="6" maxlength="5000" placeholder="Example: Your account will be blocked. Share your UPI PIN to receive refund..." spellcheck="false"></textarea>
+      <div class="meta"><span id="counter">0 / 5000</span><button id="clear" class="text-button" type="button">Clear</button></div>
+      <button id="check" class="primary" type="button">Check safety</button>
+      <p class="hint">Tip: OTP, UPI PIN ya bank details wala hissa paste karne se pehle hata dein.</p>
+    </section>
+
+    <section id="result" class="result" aria-live="polite" hidden>
+      <div class="result-head">
+        <span id="risk-icon" class="risk-icon" aria-hidden="true">!</span>
+        <div><p class="eyebrow">CHECK RESULT</p><h2 id="risk-title">Review needed</h2></div>
+      </div>
+      <p id="risk-summary"></p>
+      <ul id="signals" class="signals"></ul>
+      <div class="next-steps"><h3>Ab kya karein?</h3><ul id="advice"></ul></div>
+      <p class="disclaimer">Yeh tool sirf common warning signs batata hai. Yeh bank, NPCI ya cybercrime authority ka verification nahi hai; clean result ka matlab 100% safe hona nahi hai.</p>
+    </section>
+
+    <section class="learn">
+      <h2>Yaad rakhein</h2>
+      <div class="rule"><span>01</span><p><strong>Paise receive karne ke liye UPI PIN nahi chahiye.</strong> PIN sirf payment authorize karne ke liye hota hai.</p></div>
+      <div class="rule"><span>02</span><p><strong>OTP, UPI PIN ya screen share kabhi na karein.</strong> Bank/support staff bhi yeh nahi maangte.</p></div>
+      <div class="rule"><span>03</span><p><strong>Unknown APK ya remote-access app install na karein.</strong> Official app store aur verified support channel use karein.</p></div>
+    </section>
+
+    <footer>
+      <p>Emergency: financial cyber fraud report karne ke liye India mein <strong>1930</strong> par call karein aur <a href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer">cybercrime.gov.in</a> par complaint karein.</p>
+      <p class="small">Offline-first demo • No account • No analytics • No data storage</p>
+    </footer>
+  </main>
+</body>
+</html>
