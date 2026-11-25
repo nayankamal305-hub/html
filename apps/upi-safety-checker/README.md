@@ -11,7 +11,7 @@ A small, mobile-friendly Hindi-first tool that checks pasted SMS, WhatsApp messa
 
 ## Run locally
 
-No build step or dependencies are required. Open `index.html` in a modern browser, or serve this folder with any static web server.
+No build step or dependencies are required. Because the app uses JavaScript modules, serve this folder over HTTP instead of opening the file directly. From this directory run `python -m http.server 8000`, then visit `http://localhost:8000`.
 
 To run the rule tests with Node.js 18 or later:
 
