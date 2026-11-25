@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071a2e">
+  <meta name="description" content="UPI Suraksha Check — suspicious UPI messages, links and payment requests ko locally check karein.">
+  <title>UPI Suraksha Check</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="UPI Suraksha Check home">
+      <span class="brand-mark" aria-hidden="true">盾</span>
+      <span><strong>UPI Suraksha</strong><small>CHECK • DIGITAL SAFETY</small></span>
+    </a>
+    <div class="top-actions">
+      <span class="offline-pill" id="networkState">● Offline-ready</span>
+      <button class="icon-btn" id="languageBtn" type="button" aria-label="Change language">EN</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="eyebrow">DIGITAL PAYMENT SAFETY</p>
+        <h1 data-i18n="heroTitle">भुगतान करने से पहले,<br><em>एक बार जाँच लें।</em></h1>
+        <p class="hero-sub" data-i18n="heroSub">संदिग्ध SMS, WhatsApp मैसेज या payment link को यहाँ जाँचें। आपकी जानकारी इसी डिवाइस पर रहती है।</p>
+        <div class="trust-row"><span>✓ <span data-i18n="localOnly">जाँच आपके डिवाइस पर</span></span><span>✓ <span data-i18n="noAccount">कोई अकाउंट नहीं</span></span><span>✓ <span data-i18n="worksOffline">ऑफलाइन भी काम करे</span></span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="shield">✓</div><span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✦</span></div>
+    </section>
+
+    <section class="checker card" aria-labelledby="checkerTitle">
+      <div class="section-heading">
+        <div><p class="eyebrow" data-i18n="quickCheck">QUICK CHECK</p><h2 id="checkerTitle" data-i18n="checkerTitle">मैसेज या लिंक जाँचें</h2></div>
+        <span class="private-tag">🔒 <span data-i18n="private">Private</span></span>
+      </div>
+      <label class="field-label" for="messageInput" data-i18n="pasteLabel">संदिग्ध मैसेज, URL या payment request यहाँ पेस्ट करें</label>
+      <textarea id="messageInput" rows="6" maxlength="10000" placeholder="उदाहरण: आपका KYC बंद हो जाएगा। तुरंत इस लिंक पर क्लिक करें..." data-i18n-placeholder="pastePlaceholder"></textarea>
+      <div class="field-meta"><span id="charCount">0 / 10,000</span><span data-i18n="neverPaste">अपना OTP, PIN या बैंक पासवर्ड न डालें।</span></div>
+      <div class="action-row">
+        <button class="btn btn-primary" id="analyzeBtn" type="button"><span>⌕</span> <span data-i18n="analyze">सुरक्षा जाँचें</span></button>
+        <button class="btn btn-quiet" id="sampleBtn" type="button" data-i18n="trySample">डेमो देखें</button>
+        <button class="btn btn-quiet" id="clearBtn" type="button" data-i18n="clear">मिटाएँ</button>
+      </div>
+      <p class="input-error" id="inputError" role="alert"></p>
+    </section>
+
+    <section class="result card hidden" id="resultPanel" aria-live="polite">
+      <div class="result-top"><div><p class="eyebrow" data-i18n="scanResult">SCAN RESULT</p><h2 id="resultTitle">जाँच पूरी हुई</h2></div><span id="riskBadge" class="risk-badge">सावधानी</span></div>
+      <div class="score-row"><div class="score-ring" id="scoreRing"><strong id="riskScore">0</strong><small>/ 100</small></div><div class="score-copy"><strong id="riskSummary"></strong><p id="riskDescription"></p></div></div>
+      <div class="findings-wrap"><h3 data-i18n="signalsFound">क्या मिला</h3><ul id="findingsList" class="findings"></ul></div>
+      <div class="advice-box"><strong data-i18n="whatToDo">अब क्या करें?</strong><ul id="adviceList"></ul></div>
+      <p class="disclaimer" data-i18n="disclaimer">यह नियम-आधारित शुरुआती जाँच है, बैंक/पुलिस की पुष्टि या गारंटी नहीं। साफ परिणाम भी लिंक को सुरक्षित साबित नहीं करता।</p>
+    </section>
+
+    <section class="grid-two">
+      <article class="card safety-card">
+        <p class="eyebrow" data-i18n="goldenRules">GOLDEN RULES</p><h2 data-i18n="rememberTitle">UPI के 5 ज़रूरी नियम</h2>
+        <ol class="rules">
+          <li><span>01</span><div><strong data-i18n="rule1Title">PIN सिर्फ पैसे भेजने के लिए</strong><p data-i18n="rule1Text">पैसे पाने के लिए UPI PIN डालने की ज़रूरत नहीं होती।</p></div></li>
+          <li><span>02</span><div><strong data-i18n="rule2Title">OTP / PIN कभी साझा न करें</strong><p data-i18n="rule2Text">बैंक कर्मचारी भी आपसे OTP या UPI PIN नहीं माँगते।</p></div></li>
+          <li><span>03</span><div><strong data-i18n="rule3Title">QR कोड भुगतान भेज सकता है</strong><p data-i18n="rule3Text">QR स्कैन करने से पहले नाम और रकम जाँचें।</p></div></li>
+          <li><span>04</span><div><strong data-i18n="rule4Title">अनजान APK / screen-share से बचें</strong><p data-i18n="rule4Text">किसी अनजान व्यक्ति के कहने पर ऐप install न करें।</p></div></li>
+          <li><span>05</span><div><strong data-i18n="rule5Title">जल्दबाज़ी में भुगतान न करें</strong><p data-i18n="rule5Text">अर्जेंसी, धमकी या इनाम के दबाव में रुककर जाँचें।</p></div></li>
+        </ol>
+      </article>
+      <article class="card emergency-card">
+        <p class="eyebrow" data-i18n="needHelp">NEED HELP?</p><h2 data-i18n="fraudHappened">अगर धोखाधड़ी हो गई है</h2>
+        <p data-i18n="fraudText">तुरंत अपने बैंक को सूचित करें और राष्ट्रीय साइबर क्राइम हेल्पलाइन पर रिपोर्ट करें।</p>
+        <a class="helpline" href="tel:1930"><span>☎</span><span><small data-i18n="callNow">तुरंत कॉल करें</small><strong>1930</strong></span><span class="arrow">↗</span></a>
+        <a class="btn btn-light" href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer" data-i18n="reportOnline">ऑनलाइन शिकायत दर्ज करें ↗</a>
+        <p class="emergency-note" data-i18n="evidenceTip">मैसेज, नंबर, transaction ID और screenshots सुरक्षित रखें। किसी को OTP/PIN न बताएँ।</p>
+      </article>
+    </section>
+
+    <section class="card learning-card">
+      <div class="section-heading"><div><p class="eyebrow" data-i18n="learnScams">LEARN THE TRICKS</p><h2 data-i18n="commonScams">आम UPI स्कैम पहचानें</h2></div></div>
+      <div class="scam-grid">
+        <article><span class="scam-icon">↙</span><strong data-i18n="scam1Title">फर्जी collect request</strong><p data-i18n="scam1Text">“पैसे receive करने” के नाम पर PIN डालने को कहते हैं।</p></article>
+        <article><span class="scam-icon">⌁</span><strong data-i18n="scam2Title">KYC / account block</strong><p data-i18n="scam2Text">अकाउंट बंद होने का डर दिखाकर नकली लिंक भेजते हैं।</p></article>
+        <article><span class="scam-icon">▣</span><strong data-i18n="scam3Title">QR / refund scam</strong><p data-i18n="scam3Text">रिफंड पाने के लिए QR स्कैन या payment approve करवाते हैं।</p></article>
+        <article><span class="scam-icon">▤</span><strong data-i18n="scam4Title">Remote access APK</strong><p data-i18n="scam4Text">फोन की स्क्रीन और गतिविधि देखने वाला ऐप install करवाते हैं।</p></article>
+      </div>
+    </section>
+    <footer><span>UPI Suraksha Check</span><span data-i18n="footerPrivacy">आपकी जाँच आपके डिवाइस पर रहती है • कोई डेटा अपलोड नहीं होता</span><a href="./README.md" target="_blank" rel="noopener noreferrer">About</a></footer>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
