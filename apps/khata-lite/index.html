@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10251e">
+<title>Khata Lite — Simple Expense Tracker</title>
+<style>
+:root{color-scheme:light;--ink:#17231e;--muted:#68756e;--line:#e4eae6;--paper:#f5f8f5;--green:#176b4b;--green2:#e5f3eb;--red:#b33b35;--amber:#8a5a12}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+header{background:#10251e;color:#fff;padding:25px 18px 34px} .wrap{max-width:920px;margin:auto} .top{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#b9d8c8;font-weight:700}.privacy{font-size:12px;color:#c4d9ce;border:1px solid #426354;border-radius:99px;padding:5px 9px}
+h1{font-size:clamp(26px,5vw,38px);line-height:1.1;margin:22px 0 7px}header p{margin:0;color:#d0ded6}
+main{padding:0 16px 42px;margin-top:-17px}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.stat,.panel{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 5px 18px #10251e08}.stat{padding:16px}.stat span{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:clamp(17px,3vw,24px);margin-top:4px;overflow-wrap:anywhere}.stat.income strong{color:var(--green)}.stat.expense strong{color:var(--red)}
+.layout{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.2fr);gap:14px;margin-top:14px}.panel{padding:19px}.panel h2{font-size:18px;margin:0 0 14px}.field{margin-bottom:12px}label{display:block;font-size:13px;font-weight:650;margin-bottom:5px}input,select,button{font:inherit}input,select{width:100%;padding:11px 12px;border:1px solid #d8e1db;border-radius:10px;background:#fff;color:var(--ink);min-height:44px}input:focus,select:focus,button:focus-visible{outline:3px solid #8ac8a8;outline-offset:2px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{border:0;border-radius:10px;padding:11px 14px;min-height:43px;font-weight:700;cursor:pointer}.primary{background:var(--green);color:white;width:100%}.secondary{background:var(--green2);color:var(--green)}.quiet{background:#f0f3f1;color:#35433b}.danger{color:var(--red);background:#fff0ef}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:12px}.toolbar h2{margin:0}.toolbar select{width:auto;min-width:130px}.actions{display:flex;gap:7px;flex-wrap:wrap}.actions .btn{font-size:12px;padding:8px 10px;min-height:36px}
+.list{display:grid;gap:8px}.item{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--line);border-radius:12px}.emoji{width:39px;height:39px;border-radius:12px;background:#f0f5f1;display:grid;place-items:center;font-size:19px;flex:none}.details{min-width:0;flex:1}.details strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.details small{color:var(--muted)}.amount{font-weight:750;white-space:nowrap}.amount.out{color:var(--red)}.amount.in{color:var(--green)}.del{border:0;background:transparent;color:#77847c;cursor:pointer;font-size:18px;padding:5px}.empty{text-align:center;color:var(--muted);padding:30px 12px}.hint{font-size:12px;color:var(--muted);margin:12px 0 0}.footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(max-width:700px){.layout{grid-template-columns:1fr}.summary{gap:8px}.stat{padding:12px}.stat span{font-size:11px}.stat strong{font-size:17px}}@media(max-width:380px){.summary{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="top"><div class="brand">Khata Lite</div><div class="privacy">🔒 Private on this device</div></div><h1>Your money, made simple.</h1><p>A clean daily expense notebook. No account, no bank connection, no cloud.</p></div></header>
+<main class="wrap">
+<section class="summary" aria-label="Monthly summary">
+<div class="stat"><span>Balance this month</span><strong id="balance">₹0</strong></div>
+<div class="stat income"><span>Money received</span><strong id="income">₹0</strong></div>
+<div class="stat expense"><span>Money spent</span><strong id="expenses">₹0</strong></div>
+</section>
+<div class="layout">
+<section class="panel"><h2>Add a transaction</h2>
+<form id="entryForm">
+<div class="field"><label for="kind">Type</label><select id="kind"><option value="expense">Expense — I spent</option><option value="income">Income — I received</option></select></div>
+<div class="field"><label for="amount">Amount (₹)</label><input id="amount" type="number" min="0.01" max="100000000" step="0.01" inputmode="decimal" placeholder="e.g. 250" required></div>
+<div class="two"><div class="field"><label for="category">Category</label><select id="category"><option>Food</option><option>Travel</option><option>Bills</option><option>Shopping</option><option>Health</option><option>Education</option><option>Home</option><option>Salary</option><option>Business</option><option>Other</option></select></div><div class="field"><label for="date">Date</label><input id="date" type="date" required></div></div>
+<div class="field"><label for="note">Note (optional)</label><input id="note" maxlength="70" placeholder="e.g. Groceries, bus pass"></div>
+<button class="btn primary" type="submit">＋ Save transaction</button>
+</form><p class="hint">Your entries stay in this browser on this device. Clearing browser data may erase them.</p></section>
+<section class="panel"><div class="toolbar"><h2>Transactions</h2><select id="monthFilter" aria-label="Filter by month"></select></div>
+<div class="actions"><button class="btn secondary" id="exportBtn" type="button">↓ Export CSV</button><button class="btn quiet" id="allBtn" type="button">All months</button></div>
+<div id="transactionList" class="list" aria-live="polite"></div>
+</section>
+</div><div class="footer">Khata Lite · Free and offline-friendly · Not connected to your bank or UPI</div>
+</main>
+<script>
+(function(){
+'use strict';
+const KEY='khata-lite-transactions-v1';
+const $=id=>document.getElementById(id);
+const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
+const money=n=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2}).format(n);
+let entries=[];
+try{const saved=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(saved))entries=saved.filter(x=>x&&typeof x.id==='string'&&Number.isFinite(x.amount)&&['income','expense'].includes(x.kind)&&/^\d{4}-\d{2}-\d{2}$/.test(x.date));}catch(e){entries=[];}
+$('date').value=today();
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(entries));return true}catch(e){alert('Could not save. Your browser storage may be full or disabled. Export your entries before closing.');return false}}
+function months(){const values=[...new Set(entries.map(x=>x.date.slice(0,7)))].sort().reverse();const current=today().slice(0,7);if(!values.includes(current))values.unshift(current);$('monthFilter').innerHTML=values.map(m=>'<option value="'+m+'">'+new Date(m+'-02').toLocaleDateString('en-IN',{month:'long',year:'numeric'})+'</option>').join('');}
+function render(){const selected=$('monthFilter').value||today().slice(0,7);const rows=entries.filter(x=>x.date.startsWith(selected)).sort((a,b)=>b.date.localeCompare(a.date)||b.id.localeCompare(a.id));const inc=rows.filter(x=>x.kind==='income').reduce((s,x)=>s+x.amount,0);const exp=rows.filter(x=>x.kind==='expense').reduce((s,x)=>s+x.amount,0);$('income').textContent=money(inc);$('expenses').textContent=money(exp);$('balance').textContent=money(inc-exp);
+const list=$('transactionList');list.replaceChildren();if(!rows.length){const p=document.createElement('div');p.className='empty';p.textContent='No transactions for this month yet. Add your first entry!';list.append(p);return}
+const icons={Food:'🍲',Travel:'🚌',Bills:'💡',Shopping:'🛍️',Health:'🩺',Education:'📚',Home:'🏠',Salary:'💼',Business:'🏪',Other:'📌'};
+rows.forEach(x=>{const item=document.createElement('div');item.className='item';const emoji=document.createElement('div');emoji.className='emoji';emoji.textContent=icons[x.category]||'📌';const detail=document.createElement('div');detail.className='details';const title=document.createElement('strong');title.textContent=x.note||x.category;const meta=document.createElement('small');meta.textContent=x.category+' · '+new Date(x.date+'T12:00:00').toLocaleDateString('en-IN');detail.append(title,meta);const amount=document.createElement('div');amount.className='amount '+(x.kind==='income'?'in':'out');amount.textContent=(x.kind==='income'?'+':'−')+money(x.amount);const del=document.createElement('button');del.className='del';del.type='button';del.textContent='×';del.setAttribute('aria-label','Delete '+(x.note||x.category));del.addEventListener('click',()=>{if(confirm('Delete this transaction?')){entries=entries.filter(y=>y.id!==x.id);if(persist())render()}});item.append(emoji,detail,amount,del);list.append(item)});
+}
+$('entryForm').addEventListener('submit',e=>{e.preventDefault();const amount=Number($('amount').value);const date=$('date').value;if(!Number.isFinite(amount)||amount<=0||amount>100000000||!date){alert('Enter a valid amount and date.');return}const item={id:(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random()),kind:$('kind').value,amount:Math.round(amount*100)/100,category:$('category').value,date,note:$('note').value.trim()};entries.push(item);if(persist()){months();$('monthFilter').value=date.slice(0,7);render();$('amount').value='';$('note').value='';$('amount').focus()}});
+$('monthFilter').addEventListener('change',render);
+$('allBtn').addEventListener('click',()=>{$('monthFilter').value=today().slice(0,7);render()});
+$('exportBtn').addEventListener('click',()=>{if(!entries.length){alert('There are no entries to export yet.');return}const quote=v=>'"'+String(v??'').replace(/"/g,'""')+'"';const csv=[['Date','Type','Category','Note','Amount INR'],...entries.slice().sort((a,b)=>a.date.localeCompare(b.date)).map(x=>[x.date,x.kind,x.category,x.note,x.amount])].map(row=>row.map(quote).join(',')).join('\r\n');const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='khata-lite-transactions.csv';a.click();URL.revokeObjectURL(url)});
+months();render();
+})();
+</script>
+</body></html>
