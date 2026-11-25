@@ -1,0 +1,8 @@
+{
+  "name": "upi-suraksha-checker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}
