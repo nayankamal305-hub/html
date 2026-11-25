@@ -1,0 +1,12 @@
+{
+  "name": "UPI Suraksha Check",
+  "short_name": "UPI Suraksha",
+  "description": "Offline-first UPI scam awareness and message checker.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#071525",
+  "theme_color": "#071a2e",
+  "lang": "hi",
+  "icons": [{"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
