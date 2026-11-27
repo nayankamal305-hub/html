@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f766e" />
+  <title>Ration Budget Planner</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Offline-first household tool</p>
+        <h1>Ration Budget Planner</h1>
+        <p>महीने की grocery list, budget और खर्च एक ही जगह track करें।</p>
+      </div>
+      <button id="clearAll" class="ghost" type="button">सारा डेटा मिटाएँ</button>
+    </header>
+
+    <section class="summary" aria-label="सारांश">
+      <article><span>Budget</span><strong id="budgetValue">₹0</strong></article>
+      <article><span>Planned</span><strong id="plannedValue">₹0</strong></article>
+      <article><span>Remaining</span><strong id="remainingValue">₹0</strong></article>
+    </section>
+
+    <section class="card">
+      <h2>महीने का budget</h2>
+      <div class="row">
+        <label class="field grow">Budget (₹)
+          <input id="budgetInput" type="number" min="0" step="1" inputmode="decimal" placeholder="जैसे 6000" />
+        </label>
+        <button id="saveBudget" class="primary" type="button">Save budget</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <div><h2>Items जोड़ें</h2><p class="muted">जरूरत के हिसाब से quantity और कीमत लिखें।</p></div>
+        <button id="addItem" class="secondary" type="button">+ नया item</button>
+      </div>
+      <div id="items" class="items" aria-live="polite"></div>
+      <div id="emptyState" class="empty">अभी कोई item नहीं है। पहला item जोड़ें।</div>
+    </section>
+
+    <section class="card">
+      <div class="section-head"><h2>Category summary</h2><span class="muted">Planned खर्च</span></div>
+      <div id="categorySummary" class="category-list"></div>
+    </section>
+
+    <footer class="footer">डेटा इसी device के browser में save होता है। कोई account या server storage नहीं।</footer>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
