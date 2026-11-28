@@ -1,0 +1,1 @@
+{"name":"emergency-info-card","private":true,"type":"module","scripts":{"test":"node card.test.js"}}
